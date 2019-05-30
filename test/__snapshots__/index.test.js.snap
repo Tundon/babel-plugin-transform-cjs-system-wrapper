@@ -1,0 +1,251 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Plugin should es module 1`] = `
+"System.registerDynamic([], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+  module.exports = {
+    blah: 'blah '
+  };
+  Object.defineProperty(module.exports, '__esModule', {
+    value: true
+  });
+});"
+`;
+
+exports[`Plugin should es module has 1`] = `
+"System.registerDynamic([], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+  module.exports = {
+    blah: 'blah '
+  };
+  Object.defineProperty(module.exports, '__esModule', {
+    value: true
+  });
+});"
+`;
+
+exports[`Plugin should keep local define 1`] = `
+"System.registerDynamic([], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+  var define;
+
+  if (define) {
+    if (typeof define === 'function' && define.amd) {
+      define([], function () {
+        return {};
+      });
+    }
+  }
+});"
+`;
+
+exports[`Plugin should not return module.export if module redeclared in scope 1`] = `
+"System.registerDynamic([], true, function ($__require, exports, module) {
+  'use strict';
+
+  var global = this || self,
+      GLOBAL = global;
+  var module;
+});"
+`;
+
+exports[`Plugin should replace global define 1`] = `
+"System.registerDynamic([], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+
+  if (undefined) {
+    if (typeof undefined === 'function' && define.amd) {
+      define([], function () {
+        return {};
+      });
+    }
+  }
+});"
+`;
+
+exports[`Plugin should replace require if no function scoped require is present 1`] = `
+"System.registerDynamic([], true, function ($__require, exports, module) {
+  'use strict';
+
+  var global = this || self,
+      GLOBAL = global;
+
+  (function () {
+    if (typeof $__require != 'undefined' && eval('typeof require') != 'undefined') {
+      exports.cjs = true;
+    }
+
+    if (false) {
+      $__require('foo');
+      $__require(\\"bar\\");
+      $__require('some' + 'expression');
+    }
+  })();
+});"
+`;
+
+exports[`Plugin should replace system node require 1`] = `
+"SystemJS.registerDynamic([], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+
+  SystemJS._nodeRequire(\\"foo\\");
+
+  SystemJS._nodeRequire(\\"bar\\");
+});"
+`;
+
+exports[`Plugin should replace system node require 2 1`] = `
+"$__System.registerDynamic([], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+  module.exports = $__System._nodeRequire ? process : $__require('foo');
+});"
+`;
+
+exports[`Plugin should set deps 1`] = `
+"System.registerDynamic([\\"foo\\", \\"bar\\"], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+});"
+`;
+
+exports[`Plugin should set dynamic filepaths 1`] = `
+"System.registerDynamic([], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+  var $__pathVars = System.registry.get('@@cjs-helpers').getPathVars(module.id),
+      __filename = $__pathVars.filename,
+      __dirname = $__pathVars.dirname;
+  console.log(__filename);
+});"
+`;
+
+exports[`Plugin should set globals 1`] = `
+"System.registerDynamic([], true, function ($__require, exports, module) {
+  var f = $__require(\\"foo\\"), b = $__require(\\"bar\\");
+  var global = this || self,
+      GLOBAL = global;
+});"
+`;
+
+exports[`Plugin should set module name 1`] = `
+"System.registerDynamic(\\"foobar\\", [], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+});"
+`;
+
+exports[`Plugin should set static filepaths 1`] = `
+"System.registerDynamic([], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+  var __filename = \\"\\",
+      __dirname = \\"\\";
+  console.log(__filename);
+});"
+`;
+
+exports[`Plugin should set system global 1`] = `
+"foo.registerDynamic([], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+});"
+`;
+
+exports[`Plugin should this context 1`] = `
+"SystemJS.registerDynamic(\\"foobar\\", [\\"bar\\"], true, function ($__require, exports, module) {
+  var f = $__require(\\"foo\\");
+  var global = this || self,
+      GLOBAL = global;
+  exports.asdf = {
+    obj: 'x'
+  };
+  (function (exports) {
+    this.another = 'y';
+    exports.p = 'q';
+  }).call(exports.asdf, exports);
+});"
+`;
+
+exports[`Plugin should transfer directives 1`] = `
+"System.registerDynamic([], true, function ($__require, exports, module) {
+  'use strict';
+  'foobar';
+
+  var global = this || self,
+      GLOBAL = global;
+});"
+`;
+
+exports[`Plugin should use filepath 1`] = `
+"System.registerDynamic([], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+  var __filename = \\"path/to/foobar\\",
+      __dirname = \\"path/to\\";
+  console.log(__dirname);
+});"
+`;
+
+exports[`Plugin should use optimize 1`] = `
+"System.registerDynamic([], true, function ($__require, exports, module) {
+  var global = this || self,
+      GLOBAL = global;
+  \\"production\\";
+});"
+`;
+
+exports[`Plugin should wrap cjs with system register dynamic 1`] = `
+"SystemJS.registerDynamic(\\"foobar\\", [\\"bar\\"], true, function ($__require, exports, module) {
+  'use strict';
+
+  var f = $__require(\\"foo\\");
+  var global = this || self,
+      GLOBAL = global;
+  var $__pathVars = SystemJS.registry.get('@@cjs-helpers').getPathVars(module.id),
+      __filename = $__pathVars.filename,
+      __dirname = $__pathVars.dirname;
+
+  $__require.resolve = function (request) {
+    return SystemJS.registry.get('@@cjs-helpers').requireResolve(request, module.id);
+  };
+
+  console.log(__filename);
+
+  (function (require) {
+    if (typeof require != 'undefined' && eval('typeof require') != 'undefined') {
+      exports.cjs = true;
+    }
+
+    if (false) {
+      require('foo');
+
+      require(\\"bar\\");
+
+      require('some' + 'expression');
+    }
+  })($__require);
+
+  (function (require) {
+    require.resolve('raboof');
+  })($__require);
+
+  exports.env = \\"production\\";
+});"
+`;
+
+exports[`Plugin should wrap the readme example 1`] = `
+"System.registerDynamic(\\"foobar\\", [\\"bar\\"], true, function ($__require, exports, module) {
+  'use strict';
+
+  var f = $__require(\\"foo\\");
+  var global = this || self,
+      GLOBAL = global;
+  var foo = $__require(\\"foo\\");
+});"
+`;

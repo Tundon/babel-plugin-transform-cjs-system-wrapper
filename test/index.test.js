@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import assert from 'assert';
-import { transformFileSync } from 'babel-core';
+import { transformFileSync } from '@babel/core';
 import fileExists from 'file-exists';
 import plugin from '../src';
 
@@ -39,8 +39,8 @@ describe('Plugin', () => {
         const expected = fs.readFileSync(
           path.join(fixtureDir, 'expected.js')
         ).toString();
-
-        assert.equal(trim(actual), trim(expected));
+        expect(actual).toMatchSnapshot();
+        // assert.equal(trim(actual), trim(expected));
       }
     });
   });

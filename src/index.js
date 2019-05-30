@@ -1,11 +1,11 @@
-import template from 'babel-template';
+import template from '@babel/template';
 
 export default function ({ types: t }) {
 
   const requireIdentifier = t.identifier('require');
 
   const buildTemplate = template(`
-    SYSTEM_GLOBAL.registerDynamic(MODULE_NAME, [DEPS], true, BODY);
+    SYSTEM_GLOBAL.registerDynamic(MODULE_NAME, DEPS, true, BODY);
   `);
 
   const buildFactory = template(`
@@ -16,7 +16,7 @@ export default function ({ types: t }) {
 
   const buildDefineGlobal = template(`
      var global = this || self, GLOBAL = global;
-  `);
+  `, { placeholderPattern: false, placeholderWhitelist: new Set() });
 
   const buildStaticFilePaths = template(`
     var __filename = FILENAME, __dirname = DIRNAME;
@@ -212,8 +212,8 @@ export default function ({ types: t }) {
           path.node.body = [buildTemplate({
             SYSTEM_GLOBAL: systemGlobal,
             MODULE_NAME: moduleName,
-            DEPS: deps,
-            BODY: factory
+            DEPS: t.arrayExpression(deps),
+            BODY: factory.expression
           })];
 
           const remapFactoryScopedRequire = {
